@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .error{
+            font-size: x-large;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h2>Form Validation</h2>
+    <form action="" onsubmit="return validateForm()">
+        <!-- Validate name -->
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" autocomplete="name">
+        <div id="nameError" class="error"></div><br><br>
+
+        <!-- Validate email -->
+        <label for="email">email</label>
+        <input type="email" name="email" id="email" autocomplete="email">
+        <div id="emailError" class="error"></div><br><br>
+
+        <!-- Validate password -->
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" autocomplete="new-password">
+        <div id="passwordError" class="error"></div><br><br>
+
+        <!-- Validate phonenumber -->
+        <label for="phonenumber">Phonenumber</label>
+        <input type="text" name="phonenumber" id="phonenumber" autocomplete="tel">
+        <div id="phonenumberError" class="error"></div><br><br>
+
+        <button type="submit">submit</button>
+    </form>
+    <script>
+        function validateNum(phone){
+            const regex=/^[0-9]{10}$/; //$ is to covert phonenumber into string 
+            if(phone.trim()===""){         
+                return "Textarea cannot be empty";
+            }
+            if(!regex.test(phone)){
+                return "phonenumber must contain 10 digits.";
+            }
+            return "Phonenumber is valid"
+        }
+        function validateName(name){
+            const regex=/^[A-Za-z\s]+$/;
+            if(name.trim()===""){
+                return "Textarea cannot be empty";
+            }
+            if(!regex.test(name)){
+                return "Name can only have letters and spaces.";
+            }
+            return "Name is valid"
+        }
+        function validateEmail(email){
+            const regex=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if(email.trim()===""){
+                return "Textarea cannot be empty";
+            }
+            if(!regex.test(email)){
+                return "Invalid email format";
+            }
+            return "Email is valid"
+        }
+        function validatePassword(password){
+            const regex=/^(?=.*[A-Z])(?=.*\d).{8,}$/;
+            if(password.trim()===""){
+                return "Textarea cannot be empty";
+            }
+            if(!regex.test(password)){
+                return "Password must be at least 8 characters long"
+            }
+            return "Password is valid"
+        }
+        function validateForm(){
+            let phone=document.getElementById("phonenumber").value;
+            let name=document.getElementById("name").value;
+            let email=document.getElementById("email").value;
+            let password=document.getElementById("password").value;
+
+            let phonenumberError=validateNum(phone);
+            let nameError=validateName(name);
+            let emailError=validateEmail(email);
+            let passwordError=validatePassword(password);
+
+            if(phonenumberError==="Phonenumber is valid" && nameError==="Name is valid" && emailError==="Email is valid" && passwordError==="Password is valid"){
+                    return true; //allows form submission only if all conditions are true
+                }
+
+            document.getElementById("phonenumberError").innerText=phonenumberError==="is valid"?"":phonenumberError;
+            document.getElementById("nameError").innerText=nameError==="is valid"?"":nameError;
+            document.getElementById("emailError").innerText=emailError==="is valid"?"":emailError;
+            document.getElementById("passwordError").innerText=passwordError==="is valid"?"":passwordError;
+            return false;
+        }
+    </script>
+</body>
+</html>
