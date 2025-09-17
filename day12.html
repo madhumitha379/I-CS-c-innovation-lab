@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // a set is a collection of unique value.it automatically removes duplicate
+        // syntax:
+        // let mySet=new Set([iterable]);
+        let email = new Set([]);
+        email.add("js@gmail.com");
+        email.add("java@gmail.com");
+        email.add("py@gmail.com");
+        console.log(email);
+        // email.delete("py@gmail.com");
+        // console.log(email);
+        // email.clear()
+        // console.log(email)
+
+        for(let mailId of email){
+           console.log(mailId)
+        }
+        email.forEach(x=>{
+            console.log(x)
+        })
+        let admin=new Set(["Write","read","delete"]);
+        let user=new Set(["read"]);
+
+        function haspermission(role,granted){
+            return role.has(granted)
+        }
+        console.log(haspermission(admin,"delete"));
+        console.log(haspermission(user,"delete"));
+
+        let setA=new Set([1,2,3,4,5,1]);
+        let setB=new Set([6,7,8,9,10,1]);
+        let union=new Set([setA,setB]);
+        console.log(union);
+
+     let intersection=new Set([...setA].filter(x=>setB.has(x)));
+     console.log(intersection)
+
+     let difference=new Set([...setA].filter(x=>!setB.has(x)));
+     console.log(difference)
+
+
+     // entries
+     // returns a new iterative object with[value,value] pairs
+     // this is a because a set has  no separte keys -only values
+
+     let fruits=new Set(["Apple","Banana"]);
+     let entries=fruits.entries();
+     for(let entry of entries){
+        console.log(entry);
+     }
+
+     //weakmap
+     //A javascript weakmap is a collection of keyvalue pairs where the keys must be object.
+      
+     let user1={name:"java"};
+     let user2={name:"python"};
+
+     let mymap=new Map();
+     mymap.set(user1,"Welcome");
+     mymap.set(user2,"Welcome python");
+     console.log(mymap)
+
+     for(let map of mymap){
+        console.log(map)
+     }
+    </script>
+</body>
+</html>
